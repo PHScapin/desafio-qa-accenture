@@ -13,14 +13,10 @@ class SortablePage(BasePage):
         self._remove_ads()
 
     def get_list_items_text(self) -> list:
-        """Retorna uma lista com os textos de todos os elementos atuais"""
         elements = self.driver.find_elements(*self.LIST_ITEMS)
         return [el.text for el in elements]
 
     def sort_in_ascending_order(self):
-        """Usa Drag and Drop para ordenar os elementos.
-        Se eles já estiverem ordenados, bagunça a lista primeiro para provar que a automação funciona."""
-        
         desired_order = ["One", "Two", "Three", "Four", "Five", "Six"]
         actions = ActionChains(self.driver)
         
