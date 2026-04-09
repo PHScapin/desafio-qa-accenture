@@ -2,6 +2,7 @@ import os
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
+from selenium.webdriver.support import expected_conditions as EC
 
 class PracticeFormPage(BasePage):
     URL = "https://demoqa.com/automation-practice-form"
@@ -47,10 +48,12 @@ class PracticeFormPage(BasePage):
 
     def submit_form(self):
         # self.driver.save_screenshot("evidencia_formulario_preenchido.png") Coloquei para fins de validação, mas some com o código
-        self.click(self.SUBMIT_BTN)
+        element = self.find_element(self.SUBMIT_BTN)
+        self.driver.execute_script("arguments[0].click();", element)
 
     def get_success_message(self):
-        return self.find_element(self.MODAL_TITLE).text
+        element = self.wait.until(EC.visibility_of_element_located(self.MODAL_TITLE))
+        return element.text
         
     def close_modal(self):
         self.click(self.CLOSE_MODAL_BTN)
