@@ -27,7 +27,7 @@ jobs:
       - name: Navegador
         run: |
           sudo apt-get update
-          sudo apt-get install -id google-chrome-stable
+          sudo apt-get install google-chrome-stable
 
       - name: Teste API
         run: pytest tests/test_api_flow.py
