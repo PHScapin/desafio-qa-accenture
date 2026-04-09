@@ -1,0 +1,36 @@
+name: Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configuração
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Navegador
+        run: |
+          sudo apt-get update
+          sudo apt-get install -id google-chrome-stable
+
+      - name: Teste API
+        run: pytest tests/test_api_flow.py
+
+      - name: Test Frontend
+        run: behave
