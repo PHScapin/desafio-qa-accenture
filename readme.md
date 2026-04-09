@@ -1,10 +1,56 @@
-# Desafio QA Automation Engineer
-
----
+# Desafio QA Automation Engineer - Accenture
 
 Este documento tem por fim registrar a minha linha de raciocínio durante a criação/execução do desafio proposto pela Accenture. Para isso, irei registrar as principais etapas de execução, e justificar o motivo de cada decisão.
 
 ---
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+
+- [Python 3.x](https://www.python.org/downloads/) instalado.
+- Navegador Google Chrome.
+- Git instalado.
+
+### Instalação
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/PHScapin/desafio-qa-accenture.git
+   cd desafio-qa-accenture
+   ```
+
+2. Crie e ative um ambiente virtual (venv):
+
+No Windows:
+```bash
+python -m venv venv
+venv\Scripts\activate
+``` 
+
+No Linux/MacOS:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. Instale as dependências do projeto:
+```bash
+pip install -r requirements.txt
+```
+
+### Execução dos Testes
+
+Para executar os testes de API (Pytest):
+```bash
+pytest testes/ -v
+```
+Para executar os testes de Frontend (Behave/BDD):
+```
+behave feature/
+```
+
 
 ## Arquitetura
 
@@ -79,21 +125,20 @@ Durante a criação do `form_page.py` identifiquei que os anúncios por vezes in
 
 ## Considerações e Erros Encontrados
 
-Na tela “Practice Form”, ao registrar um usuário, e tentar fechar o pop-up utilizando o botão `closeLargeModal`, este não funciona corretamente e não performa nenhuma ação. No código, deixei sem uma validação para isso no decorador `@then('I close the popup')` no `form_steps.py` apenas para obtermos sucesso no teste. Em um cenário real, teríamos uma validação após identificando que o botão não funciona corretamente. :contentReference[oaicite:2]{index=2}
+Na tela “Practice Form”, ao registrar um usuário, e tentar fechar o pop-up utilizando o botão `closeLargeModal`, este não funciona corretamente e não performa nenhuma ação. No código, deixei sem uma validação para isso no decorador `@then('I close the popup')` no `form_steps.py` apenas para obtermos sucesso no teste. Em um cenário real, teríamos uma validação após identificando que o botão não funciona corretamente.
+Durante a execução do CRUD do `web_table`, poderia ter separado o registro entre registrar, modificar e excluir. Não sei se queriam um fluxo único ou não, mas optei por essa abordagem afim de trazer um resultado sólido.
 
-Durante a execução do CRUD do `web_table`, poderia ter separado o registro entre registrar, modificar e excluir. Não sei se queriam um fluxo único ou não, mas optei por essa abordagem afim de trazer um resultado sólido. :contentReference[oaicite:3]{index=3}
-
-Não sei qual exatamente qual o objetivo da avaliação, se é verificar minha capacidade de programação ou meu entendimento como QA. Para não encher o código com testes que não foram solicitados, colocarei aqui algumas coisas que não são validadas, e poderíamos validar afim de trazer uma melhor cobertura de testes. :contentReference[oaicite:4]{index=4}
+Não sei qual exatamente qual o objetivo da avaliação, se é verificar minha capacidade de programação ou meu entendimento como QA. Para não encher o código com testes que não foram solicitados, colocarei aqui algumas coisas que não são validadas, e poderíamos validar afim de trazer uma melhor cobertura de testes.
 
 - Não fizemos nenhum teste `BVA` (ou teste de fronteira) para validar se os limites dos campos funcionam corretamente.
 - Não fizemos nenhuma validação em cima do limite mínimo e máximo de caracteres em um componente (apesar de que no “Practice Form” temos a validação feita pelo próprio formulário, e se não é devidamente preenchido, este sinaliza).
 - Não fizemos teste de carga no upload do ficheiro.
 - Não validamos nenhum aspecto de `UI/UX`, como o fato de os botões do menu lateral não funcionarem corretamente, e sim os textos terem função de hyperlink.
 - Em basicamente todos os cenários, somente fizemos os casos positivos, ignorando os cenários negativos.
-- Poderia ter adicionado camadas de validação visual, como tirar print ao preencher o formulário, ou tirar print ao visualizar um componente. :contentReference[oaicite:5]{index=5}
+- Poderia ter adicionado camadas de validação visual, como tirar print ao preencher o formulário, ou tirar print ao visualizar um componente.
 
 ## Uso de Inteligência Artificial
 
-Como um pós-graduando em Inteligência Artificial, eu preciso comentar sobre o uso de modelos de `LLM` como ferramenta. No meu entendimento, a geração de código de forma descompensada é um problema de segurança, porém quando acompanhada de um profissional que entende seus objetivos e o que está programando, pode se tornar uma solução incrível em termos de escalabilidade. :contentReference[oaicite:6]{index=6}
+Como um pós-graduando em Inteligência Artificial, eu preciso comentar sobre o uso de modelos de `LLM` como ferramenta. No meu entendimento, a geração de código de forma descompensada é um problema de segurança, porém quando acompanhada de um profissional que entende seus objetivos e o que está programando, pode se tornar uma solução incrível em termos de escalabilidade.
 
-Conforme mencionado anteriormente, utilizei a IA em algumas funções auxiliares, como `_remove_ads()`. Além disso, em alguns momentos utilizei para escrever o `Gherkin` em inglês de forma mais adequada, e utilizei no troubleshooting de alguns problemas que peguei, como por exemplo o fix que fiz denominado `Adding chrome_option headless to work properly on CI`, pois uma das automações funcionava corretamente em meu computador e não funcionava corretamente na esteira. :contentReference[oaicite:7]{index=7}
+Conforme mencionado anteriormente, utilizei a IA em algumas funções auxiliares, como `_remove_ads()`. Além disso, em alguns momentos utilizei para escrever o `Gherkin` em inglês de forma mais adequada, e utilizei no troubleshooting de alguns problemas que peguei, como por exemplo o fix que fiz denominado `Adding chrome_option headless to work properly on CI`, pois uma das automações funcionava corretamente em meu computador e não funcionava corretamente na esteira. 
